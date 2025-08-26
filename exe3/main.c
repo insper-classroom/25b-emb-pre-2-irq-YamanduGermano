@@ -6,12 +6,15 @@
 const int BTN_PIN_R = 28;
 const int BTN_PIN_G = 26;
 
+volatile int red = 0;
+volatile int green = 0;
+
 void btn_callback(uint gpio, uint32_t events) {
     if (events == 0x4) {  // fall edge
         if (gpio == BTN_PIN_R) {
-            printf("fall red\n");
+            red = 1;
         } else if (gpio == BTN_PIN_G) {
-            printf("fall green\n");
+            green = 1;
         }
     }
 }
@@ -35,5 +38,13 @@ int main() {
     gpio_set_irq_enabled(BTN_PIN_G, GPIO_IRQ_EDGE_FALL, true);
 
     while (true) {
+        if (red){
+            printf("fall red\n");
+            red = 0;
+        }
+        if (green){
+            printf("fall green\n");
+            green = 0;
+        }
     }
 }
