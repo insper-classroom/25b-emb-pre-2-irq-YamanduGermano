@@ -21,7 +21,7 @@ int main() {
   gpio_set_dir(BTN,GPIO_IN);
   gpio_pull_up(BTN);
 
-  gpio_set_irq_enabled_with_callback(BTN,GPIO_IRQ_EDGE_RISE | GPIO_IRQ_EDGE_FALL,true , &btn_callback);
+  gpio_set_irq_enabled_with_callback(BTN,GPIO_IRQ_EDGE_FALL,true , &btn_callback);
   int led_state = 0;
   while(true){
     if(pressed){

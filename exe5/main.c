@@ -8,10 +8,10 @@ volatile int fall = 0;
 volatile int rise = 0;
 
 void btn_callback(uint gpio, uint32_t events){
-  if (gpio == BTN && events == 0x4){
+  if (events == 0x4){
     fall = 1;
   }
-  if (gpio == BTN && events == 0x8){
+  if (events == 0x8){
     rise = 1;
   }
 }
@@ -33,7 +33,7 @@ int main() {
         }
         if(rise){
             int now = to_ms_since_boot(get_absolute_time());
-            if (now-start_ms>800){
+            if ((now-start_ms)>800){
                 printf("Aperto longo\n");
             } else printf("Aperto curto\n");
             rise = 0;

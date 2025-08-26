@@ -14,7 +14,7 @@ void btn_callback(uint gpio, uint32_t events){
   if (gpio == BTN_R && events == 0x4){
     press_r = 1;
   }
-  if (gpio == BTN_G && events == 0x4){
+  if (gpio == BTN_G && events == 0x8){
     press_g = 1;
   }
 }
@@ -36,8 +36,8 @@ int main() {
   gpio_init(LED_R);
   gpio_set_dir(LED_R,GPIO_OUT);
 
-  gpio_set_irq_enabled_with_callback(BTN_R,GPIO_IRQ_EDGE_FALL,true,&btn_callback);
-  gpio_set_irq_enabled_with_callback(BTN_G,GPIO_IRQ_EDGE_FALL,true,&btn_callback);
+  gpio_set_irq_enabled_with_callback(BTN_R,GPIO_IRQ_EDGE_RISE | GPIO_IRQ_EDGE_FALL,true,&btn_callback);
+  gpio_set_irq_enabled_with_callback(BTN_G,GPIO_IRQ_EDGE_RISE | GPIO_IRQ_EDGE_FALL,true,&btn_callback);
 
   int status_led_r = 0, status_led_g = 0;
   while (true) {
