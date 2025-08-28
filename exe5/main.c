@@ -34,8 +34,8 @@ int main() {
         if(rise){
             int now = to_ms_since_boot(get_absolute_time());
             if ((now-start_ms)>800){
-                printf("Aperto longo\n");
-            } else printf("Aperto curto\n");
+                printf("Aperto longo!\n");
+            } else printf("Aperto curto!\n");
             rise = 0;
         }
     }
